@@ -13,7 +13,7 @@ class PDFLabel(FPDF):
         pass # No footer for labels
 
     def create_label_content(self, os_numero, cliente_nome, equipamento_desc, data_entrada):
-        self.add_page(orientation=\"L\", format=(50, 80)) # Landscape, 80mm width, 50mm height (adjust as needed)
+        self.add_page(orientation="L", format=(50, 80)) # Landscape, 80mm width, 50mm height (adjust as needed)
         self.set_font("Arial", "B", 12)
         self.cell(0, 10, f"OS: {os_numero}", 0, 1, "C")
         self.set_font("Arial", "", 10)
@@ -42,10 +42,10 @@ def gerar_etiqueta_os(os_id):
 
         pdf.create_label_content(os_numero, cliente_nome, equipamento_desc, data_entrada_str)
         
-        response_content = pdf.output(dest=\"S\").encode(\"latin-1\") # Output as bytes
+        response_content = pdf.output(dest="S").encode("latin-1") # Output as bytes
         
         return Response(response_content,
-                        mimetype=\"application/pdf\",
+                        mimetype="application/pdf",
                         headers={"Content-Disposition": f"attachment;filename=etiqueta_os_{os_numero}.pdf"})
 
     except Exception as e:
